@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OpenCode Go usage badge",
+    "description": "Shows OpenCode Go plan usage as three 2/3 arc dials at the sidebar foot (5-hour, weekly, monthly). Hover a dial for its reading; click for the three-window breakdown with a Console link. Collapsing the sidebar hands the dials to the window corner."
+  }
+}

@@ -1,0 +1,12 @@
+- insert:
+    - id: deepseek-balance-badge
+      name: '@local/deepseek-balance-badge'
+      # 可选：钉住点击目标。填自己的工作区页面，organization 换成自己的 id。
+      # 不配置时点击落到 https://opencode.ai/console
+      #
+      # config:
+      #   consoleUrl: 'https://opencode.ai/console/<organisation>/go'
+      #
+      # 其它可选字段（均有默认值）：
+      #   apiKeyEnv: OPENCODE_GO_API_KEY
+      #   timeoutMs: 8000

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Balance badge">
+  <rect x="1" y="1" width="30" height="30" rx="9" fill="#2477d4"/>
+  <path d="M8.5 11.5A2.5 2.5 0 0 1 11 9h8.5" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  <path d="M8.5 11.5v9A2.5 2.5 0 0 0 11 23h10.5a2.5 2.5 0 0 0 2.5-2.5v-6A2.5 2.5 0 0 0 21.5 12h-13" fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="19.75" cy="17.5" r="1.6" fill="#ffffff"/>
+</svg>

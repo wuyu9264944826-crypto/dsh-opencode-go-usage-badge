@@ -1,0 +1,11 @@
+# 依赖与构建产物（本插件无依赖，留作兜底）
+node_modules/
+
+# DSH 工具在目录里生成的本地缓存
+.dsh-project-memory/
+
+# 分发产物与系统垃圾
+*.zip
+*.log
+.DS_Store
+Thumbs.db
