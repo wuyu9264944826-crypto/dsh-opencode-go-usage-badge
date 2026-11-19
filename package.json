@@ -1,6 +1,6 @@
 {
   "name": "@local/deepseek-balance-badge",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "private": true,
   "type": "module",
   "description": "Shows OpenCode Go plan usage as three 2/3 arc dials (5-hour, weekly, monthly) in the sidebar foot, with a three-window popover and a Console link.",

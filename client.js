@@ -488,6 +488,8 @@ window.__ModuleLoader__.load({
           const [actionHovered, setActionHovered] = React.useState(false);
           /** Measured from the hovered dial before paint; the column would clip an absolute child. */
           const [anchor, setAnchor] = React.useState(undefined);
+          /** Which dial the open popover belongs to; clicking another dial moves it there. */
+          const [anchorKey, setAnchorKey] = React.useState(undefined);
           /** The Host owns this URL; the literal is only the pre-first-read default. */
           const [consoleUrl, setConsoleUrl] = React.useState(CONSOLE_URL);
           const containerRef = React.useRef(null);
@@ -530,13 +532,31 @@ window.__ModuleLoader__.load({
               }
             }
           };
-          const openPanel = (node) => {
+          const openPanel = (node, key) => {
             setAnchor(measure(node));
+            setAnchorKey(key);
             setOpen(true);
           };
           const closePanel = () => {
             setOpen(false);
             setAnchor(undefined);
+            setAnchorKey(undefined);
+          };
+          /**
+           * Click semantics: closed + any dial opens; open + another dial moves the
+           * popover there without closing; open + the same dial closes it again.
+           */
+          const clickDial = (event, key) => {
+            if (!open) {
+              openPanel(event.currentTarget, key);
+              return;
+            }
+            if (anchorKey === key) {
+              closePanel();
+              return;
+            }
+            setAnchor(measure(event.currentTarget));
+            setAnchorKey(key);
           };
 
           React.useEffect(() => {
@@ -744,7 +764,7 @@ window.__ModuleLoader__.load({
               'aria-label': row.label + ': ' + percentUsed(row.percent),
               'aria-expanded': open,
               'aria-haspopup': 'dialog',
-              onClick: (event) => (open ? closePanel() : openPanel(event.currentTarget)),
+              onClick: (event) => clickDial(event, row.key),
               onPointerEnter: (event) => {
                 /** An open popover keeps the position it was opened at. */
                 if (open) return;
