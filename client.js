@@ -255,6 +255,10 @@ window.__ModuleLoader__.load({
     }
 
     /** The three windows in dial order, each with its display facts. */
+    /** Friendly fallbacks: a missing dictionary must never leak a raw key into the UI. */
+    const LABEL_FALLBACK = { rolling: '5-hour window', weekly: 'Weekly', monthly: 'Monthly' };
+    const SHORT_FALLBACK = { rolling: '5h', weekly: '1w', monthly: '1m' };
+
     function windowRows(state, translate, localeId) {
       const rows = [];
       for (const key of WINDOWS) {
@@ -264,8 +268,8 @@ window.__ModuleLoader__.load({
         const countdown = formatCountdown(window.resetsAt, localeId);
         rows.push({
           key,
-          label: translate(key, key),
-          shortLabel: translate(key + 'Short', key),
+          label: translate(key, LABEL_FALLBACK[key]),
+          shortLabel: translate(key + 'Short', SHORT_FALLBACK[key]),
           percent,
           limited: window.limited === true,
           countdown,
@@ -425,7 +429,8 @@ window.__ModuleLoader__.load({
     };
 
     return {
-      inject: ['slots'],
+      /** Wait for the locale service: registering dictionaries at apply time needs it mounted. */
+      inject: ['slots', 'locale'],
       apply(ctx) {
         const locale = ctx.get('locale');
         if (locale && typeof locale.register === 'function') {
