@@ -746,6 +746,8 @@ window.__ModuleLoader__.load({
               'aria-haspopup': 'dialog',
               onClick: (event) => (open ? closePanel() : openPanel(event.currentTarget)),
               onPointerEnter: (event) => {
+                /** An open popover keeps the position it was opened at. */
+                if (open) return;
                 setAnchor(measure(event.currentTarget));
                 setHoveredKey(row.key);
               },
@@ -758,7 +760,7 @@ window.__ModuleLoader__.load({
                   // Older engines cannot answer; treat it as keyboard focus.
                 }
                 setFocusedKey(visible ? row.key : undefined);
-                if (visible) setAnchor(measure(event.currentTarget));
+                if (visible && !open) setAnchor(measure(event.currentTarget));
               },
               onBlur: () => setFocusedKey(undefined),
               style: {
